@@ -1,23 +1,25 @@
 import sqlite3
 
-class SQLite():
+class Connection:
     #Constructor
-    def __init__(self):
-        self.db = sqlite3.connect('database/supermark_DB')
-        self.cursor = sqlite3.cursor()
+    def __init__(self,name):
+        self.name = name
+        self.con = sqlite3.connect(self.name)
+        self.cursor = self.con.cursor()
 
     #Abriendo conexion con la base de datos
     def enter(self):
         try:
-            self.db
+            self.con
         except Exception as e:
             print('ERROR AL CONECTAR: ',e)
+        return self.cursor
 
     #Guardar hacer Commit con la base de datos
     def save(self):
         print('Guardando cambios...')
         try:
-            self.db.commit()
+            self.con.commit()
         except Exception as e:
             print('ERROR AL SUBiR DATOS: ',e)
 
@@ -25,6 +27,6 @@ class SQLite():
     def exit(self):
         print('Cerrando conexión...')
         try:
-            self.db.close()
+            self.con.close()
         except Exception as e:
             print('ERROR AL CERRAR: ',e)
