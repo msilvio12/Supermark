@@ -1,11 +1,13 @@
-import database
-
 class Table():
 
+    def __init__(self, db):
+        self.db = db
+
     #Metdodo para crear la tablas en la base de datos
-    def user_table(self, table_name, columns):
-        sql = database.Connection.enter()
-        sql.execute(f"CREATE TABLE IF NOT EXISTS {table_name} ({columns})")
+    def user_table(self, table_name):
+        sql = self.db.enter()
+        print(type(sql))
+        #sql.execute(f"CREATE TABLE IF NOT EXISTS {table_name} ({columns})")
         
-        database.Connection().save()
-        database.Connection().exit()
+        #database.Connection().save()
+        #database.Connection().exit()

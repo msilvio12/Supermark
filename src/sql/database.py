@@ -1,6 +1,6 @@
 import sqlite3
 
-class Connection:
+class SQLite:
     #Constructor
     def __init__(self,name):
         self.name = name
@@ -8,7 +8,7 @@ class Connection:
         self.cursor = self.con.cursor()
 
     #Abriendo conexion con la base de datos
-    def enter(self):
+    def __enter__(self):
         try:
             self.con
         except Exception as e:
@@ -24,7 +24,7 @@ class Connection:
             print('ERROR AL SUBiR DATOS: ',e)
 
     #Cerrando conexion con la base de datos
-    def exit(self):
+    def __exit__(self):
         print('Cerrando conexión...')
         try:
             self.con.close()
