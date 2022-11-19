@@ -1,6 +1,14 @@
-from customer import Cliente
+from sql.database import SQLite
+from logic.customer import Cliente
+
+#Funcion para crear o iniciar la base de datos si esta creada
+def db():
+    db = SQLite('src\database\Supermark.sqlite3')
+    return db
 
 def main():
+
+    db()
 
     client1 = Cliente('magia','1234','pepe','gomez','avenida simpreviva 12')
 

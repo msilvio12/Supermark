@@ -4,10 +4,10 @@ class SQLite:
     #Constructor
     def __init__(self,name):
         self.name = name
-        self.con = sqlite3.connect(self.name)
-        self.cursor = self.con.cursor()
+        #self.con = sqlite3.connect(self.name)
+        #self.cursor = self.con.cursor()
 
-    #Abriendo conexion con la base de datos
+    #Simplfificar y arreglar, quitar manejo de errore
     def __enter__(self):
         try:
             self.con

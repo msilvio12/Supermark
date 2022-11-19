@@ -1,4 +1,4 @@
-from shopping_cart import Carrito
+from logic.shopping_cart import Carrito
 
 class Cliente:
     def __init__(self, usuario : str, clave : str, nombre: str, apellido: str, direccion: str):

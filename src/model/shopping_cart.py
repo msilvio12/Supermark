@@ -1,4 +1,4 @@
-from product import Producto
+from logic.product import Producto
 
 class Carrito():
 
