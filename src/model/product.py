@@ -37,7 +37,10 @@ class Producto():
 
     @stock.setter
     def stock(self, stock : int):
-        self._stock = stock
+        if stock > 0 :
+            self._stock = stock
+        else :
+            print('No se puede colocar stock con valores negativos')
 
     @property
     def precio(self):
@@ -45,7 +48,10 @@ class Producto():
 
     @precio.setter
     def precio(self, precio : float):
-        self._precio = precio
+        if precio > 0.0:
+            self._precio = precio
+        else :
+            print('No se puede colocar precios con valores negativos')
     
     def __str__(self) -> str:
         return f"Name: {self.nombre}\nPrice: {self.precio}"

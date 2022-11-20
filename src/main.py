@@ -1,5 +1,6 @@
 from sql.database import SQLite
-from logic.customer import Cliente
+from model.customer import Cliente
+from model.product import Producto
 
 #Funcion para crear o iniciar la base de datos si esta creada
 def db():
