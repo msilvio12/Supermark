@@ -2,8 +2,7 @@ from model.customer import Cliente
 
 
 class Tarjeta(Cliente):
-
-    def __init__(self, usuario: str, clave: str, nombre: str, apellido: str, direccion: str, saldo: float):
+    def __init__(self, usuario: str, clave: str, nombre: str, apellido: str, direccion: str, saldo: float,):
         super().__init__(usuario, clave, nombre, apellido, direccion)
         self._saldo = saldo
 
@@ -16,4 +15,4 @@ class Tarjeta(Cliente):
         if saldo > 0:
             self._saldo = saldo
         else:
-            print('No es posible cargar saldo negativo')
+            print("No es posible cargar saldo negativo")

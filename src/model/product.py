@@ -1,5 +1,4 @@
-class Producto():
-
+class Producto:
     def __init__(self, nombre: str, marca: str, categoria: str, stock: int, precio: float):
         self._nombre = nombre
         self._marca = marca
@@ -40,7 +39,7 @@ class Producto():
         if stock > 0:
             self._stock = stock
         else:
-            print('No se puede colocar stock con valores negativos')
+            print("No se puede colocar stock con valores negativos")
 
     @property
     def precio(self):
@@ -51,7 +50,7 @@ class Producto():
         if precio > 0.0:
             self._precio = precio
         else:
-            print('No se puede colocar precios con valores negativos')
+            print("No se puede colocar precios con valores negativos")
 
     def __str__(self) -> str:
         return f"Name: {self.nombre}\nPrice: {self.precio}"

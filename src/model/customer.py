@@ -4,7 +4,6 @@ from model.product import Producto
 
 
 class Cliente:
-
     def __init__(self, usuario: str, clave: str, nombre: str, apellido: str, direccion: str):
         self._usuario = usuario
         self._clave = clave
@@ -12,7 +11,13 @@ class Cliente:
         self._apellido = apellido
         self._direccion = direccion
         self._tarjeta = Tarjeta(
-            self._usuario, self._clave, self._nombre, self._apellido, self._direccion, 0.0)
+            self._usuario,
+            self._clave,
+            self._nombre,
+            self._apellido,
+            self._direccion,
+            0.0,
+        )
         self._carrito = Carrito(30, 0)
 
     # Metodos getter y setter

@@ -1,8 +1,7 @@
 from model.product import Producto
 
 
-class Carrito():
-
+class Carrito:
     def __init__(self, limite: int, cantidad: int):
         self._limite = limite  # <--- Limite del carrito 30
         self._cantidad = cantidad  # <--- cantidad del carrito comienza en 0
@@ -37,9 +36,9 @@ class Carrito():
             if self.comprobar_duplicado(item):
                 self.lista.append(item)
             else:
-                print('El objeto ya se encuentra en el carrito')
+                print("El objeto ya se encuentra en el carrito")
         else:
-            print('No hay suficiente stock')
+            print("No hay suficiente stock")
 
         return self.lista
 
