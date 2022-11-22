@@ -5,11 +5,13 @@ class Consulta:
     def __init__(self):
         self._db = SQLite('src/database/Supermark.sqlite3')
 
-    def crear_tabla(self, tabla_nombre: str, columna_nombre: list[str]):
+    #Crear tabla formateando la lista recibida para pasarla como consulta
+    def crear_tabla(self, tabla_nombre: str, lista_columna: list[str]):
         try:
             with self._db as cur:
-                cur.execute(
-                    f"CREATE TABLE IF NOT EXISTS {tabla_nombre}('{columna_nombre}');")
+                columna_nombre = ', '.join(lista_columna)
+                print(cur.execute(
+                    f"CREATE TABLE IF NOT EXISTS {tabla_nombre}({columna_nombre});"))
         except Exception as e:
             print(e)
 
