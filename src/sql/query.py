@@ -27,6 +27,26 @@ class Consulta:
         except Exception as e:
             print(e)
 
+    # Buscar en una tabla y traer una columna
+    def buscar_registro(self, tabla_nombre: str, columna_nombre: str):
+        try:
+            with self._db as cur:
+                cur.execute(
+                    f"""SELEC {columna_nombre} FROM {tabla_nombre}"""
+                )
+        except Exception as e:
+            print(e)
+
+    # Buscar en una tabla y traer todas las columnas
+    def buscar_todo(self, tabla_nombre: str):
+        try:
+            with self._db as cur:
+                cur.execute(
+                    f"""SELEC * FROM {tabla_nombre}"""
+                )
+        except Exception as e:
+            print(e)
+
     # Agrega una columna a una tabla
     def agregar_columna(self, tabla_nombre: str, nuevo_valor: str):
         try:
