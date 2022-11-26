@@ -104,6 +104,14 @@ cafe_entry = Entry(datos_cliente, borderwidth=4, width=21).grid(row=0, column=7,
 
 queso=Label(productos_disponibles,text="QUESO",font=("Arial black",12), bg="#1B2631", fg="#F7DC6F").grid(row=18, column=6, padx=8)
 queso_entry = Entry(datos_cliente, borderwidth=4, width=21).grid(row=0, column=7, padx=8) 
+
+
+jamon=Label(productos_disponibles,text="JAMON",font=("Arial black",12), bg="#1B2631", fg="#F7DC6F").grid(row=18, column=6, padx=8)
+jamon_entry = Entry(datos_cliente, borderwidth=4, width=21).grid(row=0, column=7, padx=8)
+
+
+
+
 #TOTAL DE LA COMPRA
 gasto=LabelFrame(Admin, text="GASTO TOTAL : ",font=("Arial black",12), bg="#424949", fg="#F4F6F7",relief=FLAT, borderwidth=10)
 gasto.place(x=0, y=600, relwidth=1, height=137)
