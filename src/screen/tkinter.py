@@ -4,6 +4,7 @@ from tkinter import *
 
 
 
+
 Admin = Tk()
 Admin.title("SUPERMARK")
 Admin.geometry("700x300")
