@@ -16,13 +16,15 @@ class Consulta:
         except Exception as e:
             print(e)
 
-    # Insertar un registro
-    def insertar_registro(self, tabla_nombre: str, columna_nombre: str, nuevo_valor):
+    # Insertar un registro pasando una lista con las columnas deseadas
+    def insertar_registro(self, tabla_nombre: str, lista_columna: list[str], lista_valores: list[str]):
         try:
             with self._db as cur:
+                columna_nombre = ", ".join(lista_columna)
+                columna_valores = ", ".join(lista_valores)
                 cur.execute(
                     f"""INSERT INTO {tabla_nombre} ({columna_nombre})
-                        VALUES('{nuevo_valor}');"""
+                        VALUES({columna_valores});"""
                 )
         except Exception as e:
             print(e)
