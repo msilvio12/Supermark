@@ -23,14 +23,31 @@ class Consulta:
                 columna_nombre = ", ".join(lista_columna)
                 columna_valores = ", ".join(lista_valores)
                 cur.execute(
-                    f"""INSERT INTO {tabla_nombre} ({columna_nombre})
+                    f"""INSERT OR IGNORE INTO {tabla_nombre} ({columna_nombre})
                         VALUES({columna_valores});"""
                 )
         except Exception as e:
             print(e)
 
     # Buscar en una tabla y traer una columna
-    def buscar_registro(self, tabla_nombre: str, columna_nombre: str):
+    def buscar_usuario(self, usuario: str, clave: str):
+        try:
+            with self._db as cur:
+                cur.execute(
+                    f"""SELECT usuario FROM cliente
+                    WHERE usuario = '{usuario}'
+                    AND clave = '{clave}';"""
+                )
+                if cur.fetchall():
+                    print("--> EXITO")
+                    return cur.fetchall()
+                else:
+                    print(f"--> No se encuentra el usuario : {usuario}")
+        except Exception as e:
+            print(e)
+
+    # Buscar en una tabla y traer una columna
+    def buscar_columna(self, tabla_nombre: str, columna_nombre: str):
         try:
             with self._db as cur:
                 cur.execute(
