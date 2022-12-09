@@ -1,72 +1,75 @@
-from tkinter import Tk, ttk, Frame, Toplevel, Canvas, PhotoImage, StringVar, Entry, Button, messagebox
-from sql.query import Consulta
+from tkinter import (Button, Canvas, Entry, Frame, IntVar, PhotoImage,
+                     StringVar, Tk, Toplevel, messagebox, ttk)
+
 from screen.singup import Registro
+from sql.query import Consulta
 
 
 class Inicio(Tk):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
-        self.title("Supermark")  # <-- Titulo de la ventana
-        self.geometry("650x350")  # <-- Dimension de la ventana
-        self.iconbitmap("src/assets/logosupermark.ico")  # <-- Icono a venta
-        self.configure(bg="#f49739")  # <-- Color de fondo de la ventana
-        self.usuario = StringVar()  # <-- Retener el usuario para pasarlo a SQLite
-        self.clave = StringVar()  # <-- Retener la clave para pasarla a SQLite
-        self.sql = Consulta()  # <-- Instanciar el objeto para realizar consultas SQLite
-        self.canvas = Canvas(self,
-                             bg="#f49739",
-                             height=350,
-                             width=650,
-                             bd=0,
-                             highlightthickness=0,
-                             relief="ridge")
-        self.canvas.place(x=0, y=0)
-        self.resizable(False, False)  # <-- Evitar agrandar ventana
-        self.ventana_inicio()  # <-- Instanciar metodo
-        self.mainloop()  # <-- Mantener la ventana ejecutansose hasta destruirla
+        self.title("Supermark")  # <- Titulo de la ventana
+        self.geometry("650x350")  # <- Dimension de la ventana
+        self.iconbitmap("src/assets/logosupermark.ico")  # <- Icono
+        self.configure(bg="#f49739")  # <- Color de la ventana
+        self._usuario = StringVar(self)  # <- Usuario para pasarlo a SQLite
+        self._clave = StringVar(self)  # <- Clave para pasarla a SQLite
+        self._sql = Consulta()  # <- Instanciar el objeto para realizar consultas SQLite
+        self._canvas = Canvas(self,
+                              bg="#f49739",
+                              height=350,
+                              width=650,
+                              bd=0,
+                              highlightthickness=0,
+                              relief="ridge")
+        self._canvas.place(x=0, y=0)
+        self.resizable(False, False)  # <- Evitar agrandar ventana
+        self._ventana_inicio()  # <- Instanciar metodo
+        self.mainloop()  # <- Mantener la ventana ejecutansose hasta destruirla
 
-    # Metodo contiene Label,Text,Image,Entry de la ventana usando Canvas
-    def ventana_inicio(self):
+    # Metodo privado contiene Label,Text,Image,Entry de la ventana usando Canvas
+    def _ventana_inicio(self):
 
         background_img = PhotoImage(file=f"src/assets/login/background.png")
-        self.canvas.create_image(197.5, 175.0,
-                                 image=background_img)
+        self._canvas.create_image(197.5, 175.0,
+                                  image=background_img)
 
         # Label, Asset y Entry de usuario
-        self.canvas.create_text(437.5, 34.0,
-                                text="Usuario",
-                                fill="#000000",
-                                font=("Inter-Regular", int(15.0)))
+        self._canvas.create_text(437.5, 34.0,
+                                 text="Usuario",
+                                 fill="#000000",
+                                 font=("Inter-Regular", int(15.0)))
 
         entry0_img = PhotoImage(file=f"src/assets/login/img_textBox0.png")
-        self.canvas.create_image(500.0, 65.0,
-                                 image=entry0_img)
+        self._canvas.create_image(500.0, 65.0,
+                                  image=entry0_img)
 
         entry0 = Entry(self,
                        bd=0,
                        bg="#ffffff",
                        highlightthickness=0,
-                       textvariable=self.usuario)
+                       textvariable=self._usuario)
 
         entry0.place(x=415.0, y=50,
                      width=170.0,
                      height=28)
 
         # Label, Asset y Entry de clave
-        self.canvas.create_text(430.0, 99.0,
-                                text="Clave",
-                                fill="#000000",
-                                font=("Inter-Regular", int(15.0)))
+        self._canvas.create_text(430.0, 99.0,
+                                 text="Clave",
+                                 fill="#000000",
+                                 font=("Inter-Regular", int(15.0)))
 
         entry1_img = PhotoImage(file=f"src/assets/login/img_textBox1.png")
-        self.canvas.create_image(500.0, 125.0,
-                                 image=entry1_img)
+        self._canvas.create_image(500.0, 125.0,
+                                  image=entry1_img)
 
         entry1 = Entry(self,
                        bd=0,
                        bg="#ffffff",
                        show="*",
-                       highlightthickness=0)
+                       highlightthickness=0,
+                       textvariable=self._clave)
 
         entry1.place(x=415.0, y=110,
                      width=170.0,
@@ -85,10 +88,10 @@ class Inicio(Tk):
                  width=80,
                  height=15)
 
-        self.canvas.create_text(442.5, 156.0,
-                                text="Olvido su clave o usuario?",
-                                fill="#000000",
-                                font=("Inter-Medium", int(10.0)))
+        self._canvas.create_text(442.5, 156.0,
+                                 text="Olvido su clave o usuario?",
+                                 fill="#000000",
+                                 font=("Inter-Medium", int(10.0)))
 
         # Asset boton registrar
         img1 = PhotoImage(file=f"src/assets/login/img1.png")
@@ -103,10 +106,10 @@ class Inicio(Tk):
                  width=89,
                  height=19)
 
-        self.canvas.create_text(431.0, 219.0,
-                                text="No tiene cuenta?",
-                                fill="#000000",
-                                font=("Inter-Medium", int(15.0)))
+        self._canvas.create_text(431.0, 219.0,
+                                 text="No tiene cuenta?",
+                                 fill="#000000",
+                                 font=("Inter-Medium", int(15.0)))
 
         # Asset boton iniciar sesion
         img2 = PhotoImage(file=f"src/assets/login/img2.png")
@@ -132,10 +135,10 @@ class Inicio(Tk):
         Registro(self)
 
     def iniciar_sesion(self):
-        if self.usuario.get() and self.clave.get() != None:
-            if self.sql.buscar_usuario(self.usuario.get(), self.clave.get()):
+        if self._usuario.get() and self._clave.get() != None:
+            if self._sql.buscar_usuario(self._usuario.get(), self._clave.get()):
                 messagebox.showinfo(title="Información",
-                                    message=f"Se inicio sesión con {self.usuario.get()}.")
+                                    message=f"Se inicio sesión con {self._usuario.get()}.")
             else:
                 messagebox.showerror(title="Error",
                                      message="Usuario o Contraseña incorrecto.")

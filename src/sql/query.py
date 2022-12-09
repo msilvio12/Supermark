@@ -22,10 +22,9 @@ class Consulta:
             with self._db as cur:
                 columna_nombre = ", ".join(lista_columna)
                 columna_valores = ", ".join(lista_valores)
-                cur.execute(
-                    f"""INSERT OR IGNORE INTO {tabla_nombre} ({columna_nombre})
-                        VALUES({columna_valores});"""
-                )
+                cur.execute(f"""INSERT OR IGNORE INTO {tabla_nombre} ({columna_nombre})
+                                VALUES({columna_valores});"""
+                            )
         except Exception as e:
             print(e)
 
@@ -33,16 +32,14 @@ class Consulta:
     def buscar_usuario(self, usuario: str, clave: str):
         try:
             with self._db as cur:
-                cur.execute(
-                    f"""SELECT usuario FROM cliente
-                    WHERE usuario = '{usuario}'
-                    AND clave = '{clave}';"""
-                )
-                if cur.fetchall():
-                    print("--> EXITO")
-                    return cur.fetchall()
+                consulta = "SELECT usuario,clave FROM cliente WHERE usuario = ? AND clave = ?"
+                parametro = (usuario, clave)
+                if cur.execute(consulta, parametro).fetchall():
+                    print("--> Se encontro coincidencia")
+                    return True
                 else:
                     print(f"--> No se encuentra el usuario : {usuario}")
+                    return False
         except Exception as e:
             print(e)
 
