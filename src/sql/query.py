@@ -21,10 +21,10 @@ class Consulta:
         try:
             with self._db as cur:
                 columna_nombre = ", ".join(lista_columna)
-                columna_valores = ", ".join(lista_valores)
-                cur.execute(f"""INSERT OR IGNORE INTO {tabla_nombre} ({columna_nombre})
-                                VALUES({columna_valores});"""
-                            )
+                #columna_valores = ", ".join(lista_valores)
+                consulta = f"INSERT OR IGNORE INTO {tabla_nombre} ({columna_nombre}) VALUES(?, ?, ?, ?, ?)"
+                parametro = (lista_valores)
+                cur.execute(consulta, parametro)
         except Exception as e:
             print(e)
 

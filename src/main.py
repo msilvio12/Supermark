@@ -27,7 +27,7 @@ def sql_ejemplos():
                                   'precio REAL NOT NULL'])
 
     base.insertar_registro('cliente', ['usuario', 'clave', 'nombre', 'apellido', 'direccion'],
-                           ["'Magia'", '1234', "'Mario'", "'Pepe'", "'Av. Siempreviva 742'"])
+                           ['Magia', '1234', 'Homero', 'Simpson', 'Av. Siempreviva 742'])
 
 
 def main():

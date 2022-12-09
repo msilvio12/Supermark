@@ -13,7 +13,6 @@ class SQLite():
 
     # Guardando y Cerrando base de datos
     def __exit__(self, type, value, traceback):
-        print('Comprobando cambios...')
         self.conn.commit()
         self.conn.close()
-        print('Conexión cerrada exitosamente')
+        print('Comprobación de cambios y Conexión cerrada exitosamente')
