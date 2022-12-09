@@ -147,12 +147,12 @@ class Registro(Toplevel):
     def confirmar_registro(self):
         if self._nombre.get() and self._apellido.get() and self._direccion.get() and self._usuario.get() and self._clave.get() != None:
             if self.comprobar_repetido():
-                self._sql.insertar_registro('cliente', ['usuario', 'clave', 'nombre', 'apellido', 'direccion'],
-                                            [self._usuario.get(),
-                                             self._clave.get(),
-                                             self._nombre.get(),
-                                             self._apellido.get(),
-                                             self._direccion.get()])
+                self._sql.insertar_cliente('cliente', ['usuario', 'clave', 'nombre', 'apellido', 'direccion'],
+                                           [self._usuario.get(),
+                                            self._clave.get(),
+                                            self._nombre.get(),
+                                            self._apellido.get(),
+                                            self._direccion.get()])
             else:
                 messagebox.showerror(title="Error",
                                      message="Error al registrar los datos")
@@ -161,7 +161,7 @@ class Registro(Toplevel):
                                    message="No completo ningun campo")
 
     def comprobar_repetido(self):
-        if self._sql.buscar_usuario(self._usuario.get(), self._clave.get()):
+        if self._sql.buscar_cliente(self._usuario.get(), self._clave.get()):
             messagebox.showerror(title="Error",
                                  message="Ya existe un usuario con ese nombre")
             return False

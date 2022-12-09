@@ -16,8 +16,8 @@ class Consulta:
         except Exception as e:
             print(e)
 
-    # Insertar un registro pasando una lista con las columnas deseadas
-    def insertar_registro(self, tabla_nombre: str, lista_columna: list[str], lista_valores: list[str]):
+    # Insertar un cliente pasando una lista con las columnas deseadas
+    def insertar_cliente(self, tabla_nombre: str, lista_columna: list[str], lista_valores: list[str]):
         try:
             with self._db as cur:
                 columna_nombre = ", ".join(lista_columna)
@@ -28,8 +28,20 @@ class Consulta:
         except Exception as e:
             print(e)
 
-    # Buscar en una tabla y traer una columna
-    def buscar_usuario(self, usuario: str, clave: str):
+    # Insertar un administrador pasando una lista con las columnas deseadas
+    def insertar_admin(self, tabla_nombre: str, lista_columna: list[str], lista_valores: list[str]):
+        try:
+            with self._db as cur:
+                columna_nombre = ", ".join(lista_columna)
+                #columna_valores = ", ".join(lista_valores)
+                consulta = f"INSERT OR IGNORE INTO {tabla_nombre} ({columna_nombre}) VALUES(?, ?, ?, ?, ?)"
+                parametro = (lista_valores)
+                cur.execute(consulta, parametro)
+        except Exception as e:
+            print(e)
+
+    # Buscar cliente en una tabla y traer una columna
+    def buscar_cliente(self, usuario: str, clave: str):
         try:
             with self._db as cur:
                 consulta = "SELECT usuario,clave FROM cliente WHERE usuario = ? AND clave = ?"
@@ -38,7 +50,22 @@ class Consulta:
                     print("--> Se encontro coincidencia")
                     return True
                 else:
-                    print(f"--> No se encuentra el usuario : {usuario}")
+                    print(f"--> No se encuentra el cliente : {usuario}")
+                    return False
+        except Exception as e:
+            print(e)
+
+    # Buscar admin en una tabla y traer una columna
+    def buscar_admin(self, usuario: str, clave: str):
+        try:
+            with self._db as cur:
+                consulta = "SELECT usuario,clave FROM administracion WHERE usuario = ? AND clave = ?"
+                parametro = (usuario, clave)
+                if cur.execute(consulta, parametro).fetchall():
+                    print("--> Se encontro coincidencia")
+                    return True
+                else:
+                    print(f"--> No se encuentra el administrador : {usuario}")
                     return False
         except Exception as e:
             print(e)

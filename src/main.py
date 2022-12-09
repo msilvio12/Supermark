@@ -2,7 +2,9 @@ from sql.query import Consulta
 from screen.login import Inicio
 
 
-def sql_ejemplos():
+# Se instancia Consulta para crear la base de datos
+def sql_database():
+
     base = Consulta()
 
     base.crear_tabla('administracion', ['id INTEGER PRIMARY KEY AUTOINCREMENT',
@@ -26,11 +28,21 @@ def sql_ejemplos():
                                   'stock INTEGER NOT NULL',
                                   'precio REAL NOT NULL'])
 
-    base.insertar_registro('cliente', ['usuario', 'clave', 'nombre', 'apellido', 'direccion'],
-                           ['Magia', '1234', 'Homero', 'Simpson', 'Av. Siempreviva 742'])
+
+# Se instancia Consulta para insertar valores a la base de datos
+def sql_ejemplos():
+
+    base = Consulta()
+
+    base.insertar_cliente('cliente', ['usuario', 'clave', 'nombre', 'apellido', 'direccion'],
+                          ['Magia', '1234', 'Homero', 'Simpson', 'Av. Siempreviva 742'])
+
+    base.insertar_admin('administracion', ['usuario', 'clave', 'nombre', 'apellido', 'rol'],
+                        ['Super', '1234', 'Magie', 'Simpson', 'Supervisor'])
 
 
 def main():
+    sql_database()
     sql_ejemplos()
 
     root = Inicio()

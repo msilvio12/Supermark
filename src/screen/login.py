@@ -136,9 +136,14 @@ class Inicio(Tk):
 
     def iniciar_sesion(self):
         if self._usuario.get() and self._clave.get() != None:
-            if self._sql.buscar_usuario(self._usuario.get(), self._clave.get()):
+
+            if self._sql.buscar_admin(self._usuario.get(), self._clave.get()):
                 messagebox.showinfo(title="Información",
-                                    message=f"Se inicio sesión con {self._usuario.get()}.")
+                                    message=f"Se inicio sesión como administrador {self._usuario.get()}.")
+
+            elif self._sql.buscar_cliente(self._usuario.get(), self._clave.get()):
+                messagebox.showinfo(title="Información",
+                                    message=f"Se inicio sesión como cliente {self._usuario.get()}.")
             else:
                 messagebox.showerror(title="Error",
                                      message="Usuario o Contraseña incorrecto.")
