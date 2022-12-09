@@ -30,12 +30,12 @@ class Registro(Toplevel):
         self.mainloop()  # <-- Mantener la ventana ejecutansose hasta destruirla
 
     def ventana_registro(self):
-        background_img = PhotoImage(file=f"src/assets/singup/background.png")
+        background_img = PhotoImage(file="src/assets/singup/background.png")
 
         background = self._canvas.create_image(325.0, 235.0,
                                                image=background_img)
 
-        entry0_img = PhotoImage(file=f"src/assets/singup/img_textBox0.png")
+        entry0_img = PhotoImage(file="src/assets/singup/img_textBox0.png")
         entry0_bg = self._canvas.create_image(225.0, 39.0,
                                               image=entry0_img)
 
@@ -54,7 +54,7 @@ class Registro(Toplevel):
                                  fill="#000000",
                                  font=("Inter-Regular", int(15.0)))
 
-        entry1_img = PhotoImage(file=f"src/assets/singup/img_textBox1.png")
+        entry1_img = PhotoImage(file="src/assets/singup/img_textBox1.png")
         entry1_bg = self._canvas.create_image(225.0, 95.0,
                                               image=entry1_img)
 
@@ -73,7 +73,7 @@ class Registro(Toplevel):
                                  fill="#000000",
                                  font=("Inter-Regular", int(15.0)))
 
-        entry2_img = PhotoImage(file=f"src/assets/singup/img_textBox2.png")
+        entry2_img = PhotoImage(file="src/assets/singup/img_textBox2.png")
         entry2_bg = self._canvas.create_image(513.0, 39.0,
                                               image=entry2_img)
 
@@ -92,7 +92,7 @@ class Registro(Toplevel):
                                  fill="#000000",
                                  font=("Inter-Regular", int(15.0)))
 
-        entry3_img = PhotoImage(file=f"src/assets/singup/img_textBox3.png")
+        entry3_img = PhotoImage(file="src/assets/singup/img_textBox3.png")
         entry3_bg = self._canvas.create_image(513.0, 95.0,
                                               image=entry3_img)
 
@@ -111,7 +111,7 @@ class Registro(Toplevel):
                                  fill="#000000",
                                  font=("Inter-Regular", int(15.0)))
 
-        entry4_img = PhotoImage(file=f"src/assets/singup/img_textBox4.png")
+        entry4_img = PhotoImage(file="src/assets/singup/img_textBox4.png")
         entry4_bg = self._canvas.create_image(225.0, 150.0,
                                               image=entry4_img)
 
@@ -130,7 +130,7 @@ class Registro(Toplevel):
                                  fill="#000000",
                                  font=("Inter-Regular", int(15.0)))
 
-        img0 = PhotoImage(file=f"src/assets/singup/img0.png")
+        img0 = PhotoImage(file="src/assets/singup/img0.png")
         b0 = Button(self,
                     image=img0,
                     borderwidth=0,

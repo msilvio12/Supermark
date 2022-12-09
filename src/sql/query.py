@@ -9,10 +9,9 @@ class Consulta:
     def crear_tabla(self, tabla_nombre: str, lista_columna: list[str]):
         try:
             with self._db as cur:
-                columna_nombre = ", ".join(lista_columna)
-                cur.execute(
-                    f"CREATE TABLE IF NOT EXISTS {tabla_nombre}({columna_nombre});"
-                )
+                return cur.execute(f"""CREATE TABLE IF NOT EXISTS {tabla_nombre}
+                                       ({", ".join(lista_columna)});"""
+                                   )
         except Exception as e:
             print(e)
 
@@ -20,11 +19,9 @@ class Consulta:
     def insertar_cliente(self, tabla_nombre: str, lista_columna: list[str], lista_valores: list[str]):
         try:
             with self._db as cur:
-                columna_nombre = ", ".join(lista_columna)
-                #columna_valores = ", ".join(lista_valores)
-                consulta = f"INSERT OR IGNORE INTO {tabla_nombre} ({columna_nombre}) VALUES(?, ?, ?, ?, ?)"
-                parametro = (lista_valores)
-                cur.execute(consulta, parametro)
+                return cur.execute(f"""INSERT OR IGNORE INTO {tabla_nombre} ({", ".join(lista_columna)}) 
+                                       VALUES(?, ?, ?, ?, ?)""", (lista_valores)
+                                   )
         except Exception as e:
             print(e)
 
@@ -32,11 +29,9 @@ class Consulta:
     def insertar_admin(self, tabla_nombre: str, lista_columna: list[str], lista_valores: list[str]):
         try:
             with self._db as cur:
-                columna_nombre = ", ".join(lista_columna)
-                #columna_valores = ", ".join(lista_valores)
-                consulta = f"INSERT OR IGNORE INTO {tabla_nombre} ({columna_nombre}) VALUES(?, ?, ?, ?, ?)"
-                parametro = (lista_valores)
-                cur.execute(consulta, parametro)
+                return cur.execute(f"""INSERT OR IGNORE INTO {tabla_nombre} ({", ".join(lista_columna)}) 
+                                       VALUES(?, ?, ?, ?, ?)""", (lista_valores)
+                                   )
         except Exception as e:
             print(e)
 
@@ -44,14 +39,11 @@ class Consulta:
     def buscar_cliente(self, usuario: str, clave: str):
         try:
             with self._db as cur:
-                consulta = "SELECT usuario,clave FROM cliente WHERE usuario = ? AND clave = ?"
-                parametro = (usuario, clave)
-                if cur.execute(consulta, parametro).fetchall():
-                    print("--> Se encontro coincidencia")
-                    return True
-                else:
-                    print(f"--> No se encuentra el cliente : {usuario}")
-                    return False
+                return cur.execute("""SELECT usuario,clave 
+                                      FROM cliente 
+                                      WHERE usuario = ? 
+                                      AND clave = ?""", (usuario, clave)
+                                   ).fetchone()
         except Exception as e:
             print(e)
 
@@ -59,14 +51,11 @@ class Consulta:
     def buscar_admin(self, usuario: str, clave: str):
         try:
             with self._db as cur:
-                consulta = "SELECT usuario,clave FROM administracion WHERE usuario = ? AND clave = ?"
-                parametro = (usuario, clave)
-                if cur.execute(consulta, parametro).fetchall():
-                    print("--> Se encontro coincidencia")
-                    return True
-                else:
-                    print(f"--> No se encuentra el administrador : {usuario}")
-                    return False
+                return cur.execute("""SELECT usuario,clave 
+                                      FROM administracion 
+                                      WHERE usuario = ? 
+                                      AND clave = ?""", (usuario, clave)
+                                   ).fetchone()
         except Exception as e:
             print(e)
 

@@ -30,7 +30,7 @@ class Inicio(Tk):
     # Metodo privado contiene Label,Text,Image,Entry de la ventana usando Canvas
     def _ventana_inicio(self):
 
-        background_img = PhotoImage(file=f"src/assets/login/background.png")
+        background_img = PhotoImage(file="src/assets/login/background.png")
         self._canvas.create_image(197.5, 175.0,
                                   image=background_img)
 
@@ -40,7 +40,7 @@ class Inicio(Tk):
                                  fill="#000000",
                                  font=("Inter-Regular", int(15.0)))
 
-        entry0_img = PhotoImage(file=f"src/assets/login/img_textBox0.png")
+        entry0_img = PhotoImage(file="src/assets/login/img_textBox0.png")
         self._canvas.create_image(500.0, 65.0,
                                   image=entry0_img)
 
@@ -60,7 +60,7 @@ class Inicio(Tk):
                                  fill="#000000",
                                  font=("Inter-Regular", int(15.0)))
 
-        entry1_img = PhotoImage(file=f"src/assets/login/img_textBox1.png")
+        entry1_img = PhotoImage(file="src/assets/login/img_textBox1.png")
         self._canvas.create_image(500.0, 125.0,
                                   image=entry1_img)
 
@@ -76,7 +76,7 @@ class Inicio(Tk):
                      height=28)
 
         # Asset boton recuperar usuario o clave
-        img0 = PhotoImage(file=f"src/assets/login/img0.png")
+        img0 = PhotoImage(file="src/assets/login/img0.png")
         b0 = Button(self,
                     image=img0,
                     borderwidth=0,
@@ -94,7 +94,7 @@ class Inicio(Tk):
                                  font=("Inter-Medium", int(10.0)))
 
         # Asset boton registrar
-        img1 = PhotoImage(file=f"src/assets/login/img1.png")
+        img1 = PhotoImage(file="src/assets/login/img1.png")
         b1 = Button(self,
                     image=img1,
                     borderwidth=0,
@@ -112,7 +112,7 @@ class Inicio(Tk):
                                  font=("Inter-Medium", int(15.0)))
 
         # Asset boton iniciar sesion
-        img2 = PhotoImage(file=f"src/assets/login/img2.png")
+        img2 = PhotoImage(file="src/assets/login/img2.png")
         b2 = Button(self,
                     image=img2,
                     borderwidth=0,
@@ -128,25 +128,23 @@ class Inicio(Tk):
 
     def recuperar_clave(self):
         print("Botón opción en desarollo")
-        messagebox.showinfo(message="En desarollo...", title="Supermark")
+        messagebox.showinfo("Supermark", "En desarollo...")
 
     # Metodo para instanciar objeto Registro
     def registrar(self):
         Registro(self)
 
     def iniciar_sesion(self):
-        if self._usuario.get() and self._clave.get() != None:
+        if self._usuario.get() and self._clave.get() is None:
+            messagebox.showwarning("Advertencia",
+                                   "No ingreso ningun usuario o clave.")
+        elif self._sql.buscar_admin(self._usuario.get(), self._clave.get()):
+            messagebox.showinfo("Información",
+                                f"Se inicio sesión como administrador {self._usuario.get()}.")
 
-            if self._sql.buscar_admin(self._usuario.get(), self._clave.get()):
-                messagebox.showinfo(title="Información",
-                                    message=f"Se inicio sesión como administrador {self._usuario.get()}.")
-
-            elif self._sql.buscar_cliente(self._usuario.get(), self._clave.get()):
-                messagebox.showinfo(title="Información",
-                                    message=f"Se inicio sesión como cliente {self._usuario.get()}.")
-            else:
-                messagebox.showerror(title="Error",
-                                     message="Usuario o Contraseña incorrecto.")
+        elif self._sql.buscar_cliente(self._usuario.get(), self._clave.get()):
+            messagebox.showinfo("Información",
+                                f"Se inicio sesión como cliente {self._usuario.get()}.")
         else:
-            messagebox.showwarning(title="Advertencia",
-                                   message="No ingreso ningun usuario o clave.")
+            messagebox.showerror("Error",
+                                 "Usuario o Contraseña incorrecto.")
