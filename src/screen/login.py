@@ -135,16 +135,18 @@ class Inicio(Tk):
         Registro(self)
 
     def iniciar_sesion(self):
-        if self._usuario.get() and self._clave.get() is None:
+        if not self._usuario.get() and not self._clave.get():
             messagebox.showwarning("Advertencia",
                                    "No ingreso ningun usuario o clave.")
         elif self._sql.buscar_admin(self._usuario.get(), self._clave.get()):
+            print(f"Se encontro administrador: {self._usuario.get()}")
             messagebox.showinfo("Información",
-                                f"Se inicio sesión como administrador {self._usuario.get()}.")
+                                f"Inicio sesión como administrador {self._usuario.get()}.")
 
         elif self._sql.buscar_cliente(self._usuario.get(), self._clave.get()):
+            print(f"Se encontro cliente: {self._usuario.get()}")
             messagebox.showinfo("Información",
-                                f"Se inicio sesión como cliente {self._usuario.get()}.")
+                                f"Inicio sesión como cliente {self._usuario.get()}.")
         else:
             messagebox.showerror("Error",
                                  "Usuario o Contraseña incorrecto.")

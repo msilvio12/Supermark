@@ -35,10 +35,10 @@ def sql_ejemplos():
     base = Consulta()
 
     base.insertar_cliente('cliente', ['usuario', 'clave', 'nombre', 'apellido', 'direccion'],
-                          ['Magia', '1234', 'Homero', 'Simpson', 'Av. Siempreviva 742'])
+                          ['Rosquilla', '1234', 'Homero', 'Simpson', 'Av. Siempreviva 742'])
 
     base.insertar_admin('administracion', ['usuario', 'clave', 'nombre', 'apellido', 'rol'],
-                        ['Super', '1234', 'Magie', 'Simpson', 'Supervisor'])
+                        ['Magia', '1234', 'Magie', 'Simpson', 'Supervisor'])
 
 
 def main():

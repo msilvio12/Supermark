@@ -135,7 +135,7 @@ class Registro(Toplevel):
                     image=img0,
                     borderwidth=0,
                     highlightthickness=0,
-                    command=self.confirmar_registro,
+                    command=self.comprobar_campos,
                     relief="flat")
 
         b0.place(x=225, y=250,
@@ -144,28 +144,35 @@ class Registro(Toplevel):
 
         self.mainloop()
 
-    def confirmar_registro(self):
-        if self._nombre.get() and self._apellido.get() and self._direccion.get() and self._usuario.get() and self._clave.get() != None:
-            if self.comprobar_repetido():
-                self._sql.insertar_cliente('cliente', ['usuario', 'clave', 'nombre', 'apellido', 'direccion'],
-                                           [self._usuario.get(),
-                                            self._clave.get(),
-                                            self._nombre.get(),
-                                            self._apellido.get(),
-                                            self._direccion.get()])
-            else:
-                messagebox.showerror(title="Error",
-                                     message="Error al registrar los datos")
-        else:
-            messagebox.showwarning(title="Advertencia",
-                                   message="No completo ningun campo")
-
+    # Metodo para verificar si el usuario ya existe en la base de datos
     def comprobar_repetido(self):
-        if self._sql.buscar_cliente(self._usuario.get(), self._clave.get()):
-            messagebox.showerror(title="Error",
-                                 message="Ya existe un usuario con ese nombre")
-            return False
+        return self._sql.buscar_cliente(self._usuario.get(), self._clave.get())
+
+    # Metodo para verificar si los EntryBox estan vacios
+    def comprobar_campos(self):
+        if not self._nombre.get() and not self._apellido.get() and not self._direccion.get() and not self._usuario.get() and not self._clave.get():
+            messagebox.showwarning("Advertencia",
+                                   "No completo ningun campo")
+
+        elif self.comprobar_repetido():
+            messagebox.showerror("Error",
+                                 "Ya existe un usuario con ese nombre")
         else:
-            messagebox.showinfo(title="Información",
-                                message="Confirmar registro")
-            return True
+            return self.registrar()
+
+    # Metodo para registar los datos a la base
+    def registrar(self):
+        if self._sql.insertar_cliente('cliente', ['usuario', 'clave', 'nombre', 'apellido', 'direccion'],
+                                      [self._usuario.get(),
+                                       self._clave.get(),
+                                       self._nombre.get(),
+                                       self._apellido.get(),
+                                       self._direccion.get()]):
+
+            messagebox.showinfo("Información",
+                                "Se a registrado exitosamente")
+            self.deiconify()
+            self.destroy()
+        else:
+            messagebox.showerror("Error",
+                                 "Error al registrar los datos")
