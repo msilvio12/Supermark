@@ -1,14 +1,24 @@
 from tkinter import*
 import tkinter as tk
+import mysql.connector
+from  tkinter import Toplevel
+from tkinter import Toplevel
+
+
+
+
 root=Tk()
 root.geometry("400x400")
 root.title("SUPERMARK")
 root.configure(background="#030303")
 titulo=Label(root, text=("SUPERMARK"),bd=5, relief=FLAT, 
              font=("arial black", 40), bg="#A93226", fg="#D0D3D4").pack(fill=X)
+
 #LOGO 
 #logo=tk.PhotoImage(file="logosupermark.ico")
 #logo_super=tk.Label(root, image="logosupermark.ico").pack(side="left")
+
+
 
 #DATOS CLIENTES
 datos_clientes=LabelFrame(root, text="CLIENTES", font=("arial black", 14),
@@ -34,14 +44,39 @@ carrito_entry=Entry(datos_clientes, borderwidth=4,
 cerrar_sesion=Button(datos_clientes,text="Cerrar Sesión", font=("arial black", 10), 
                     bg="#A93226", foreground="#F7F9F9").grid(row=0, column=12, padx=8)                         
 
+
 #VENTANA PRODUCTOS
 titulo_productos=Label(root, text="LISTA DE PRODUCTOS",font=("arial black", 15),
              bd=5, relief=FLAT, foreground="#050505", background="#F7DC6F")
 titulo_productos.place(x=0, y=180, width=300)
 
 
+#VENTANA FACTURACION
+
+factura=Label(root, text="FACTURACION",font=("arial black", 15),
+             bd=5, relief=FLAT, foreground="#050505", background="#F7DC6F")
+factura.place(x=600, y=180, width=300)
+
+def facturar():
+    
+    factura.insert(END, entrada.get())
+
+factura=Listbox(root, width=50, font=("arial black", 10), foreground="#F4F6F7", background="#A93226")
+factura.insert(0, "EFECTIVO")
+factura.insert(1, "TARJETA")
+factura.insert(2, "TRANSFERENCIA")
+factura.pack()
+factura.place(x=600, y=250)
+
+boton=Button(root, text="CONFIRMAR PAGO", font=("arial black",10),
+              foreground="#F7F9F9", background="#A93226",command=facturar)
+boton.pack(side=LEFT, padx=15, pady=20)
+boton.place(x=602, y=410)
 
 
+
+
+#FUNCION PARA AGREGAR PRODUCTOS
 
 def agregar():
     
@@ -61,7 +96,7 @@ lista_productos.insert(5, "QUESO")
 lista_productos.pack()
 lista_productos.place(x=0, y=250)
 
-#ELIMINAR PRODUCTOS
+# FUNCION PARA ELIMINAR PRODUCTOS
 def eliminar():
     posicion=lista_productos.curselection()[0]
     lista_productos.delete(posicion)
@@ -89,21 +124,35 @@ boton=Button(root, text="ELIMINAR PRODUCTO", font=("arial black", 10),
 boton.pack(side=RIGHT, padx=15,pady=20)
 boton.place(x=20, y=560)
 
+#BOTON DE DESCUENTO POR COMPRA
+
+descuento=Label(root, text="DESCUENTO POR COMPRA",font=("arial black", 10),
+             bd=5, relief=FLAT, foreground="#050505", background="#F7DC6F")
+descuento.place(x=20, y=610, width=300)
+
+entrada=Entry(root)
+entrada.pack()
+entrada.place(x=20, y=660, width=165)
+
+
+
+
+
 #BOTONES DE OPERACION
 
 boton_frame=Frame(titulo, bd=7, relief=FLAT, bg="#A93226")
-boton_frame.place(x=800, y=600, width=600, height=70)
+boton_frame.place(x=600, y=600, width=680, height=70)
 
-boton_factura=Button(boton_frame, text="FACTURA", width=15, font=("arial black", 10), 
+boton_factura=Button(boton_frame, text="IMPRIMIR FACTURA", width=20, font=("arial black", 10), 
                      bg="#A93226", foreground="#F7F9F9").grid(row=0, column=0,
                      padx=12, pady=12)
 
 
-boton_envio=Button(boton_frame, text="ENVIAR", width=15, font=("arial black", 10), 
+boton_comprar=Button(boton_frame, text="HISTORIAL DE COMPRA", width=20, font=("arial black", 10), 
                      bg="#A93226", foreground="#F7F9F9").grid(row=0, column=1,
                      padx=10, pady=6)
 
-boton_comprar=Button(boton_frame, text="COMPRAR", width=15, font=("arial black", 10), 
+boton_enviar=Button(boton_frame, text="ENVIO A DOMICILIO", width=20, font=("arial black", 10), 
                      bg="#A93226", foreground="#F7F9F9").grid(row=0, column=2,
                      padx=10, pady=6)
 
