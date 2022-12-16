@@ -3,27 +3,34 @@ import tkinter as tk
 import mysql.connector
 from  tkinter import Toplevel
 from tkinter import Toplevel
-
-
+from tkinter import ttk
+import os
 
 
 root=Tk()
 root.geometry("400x400")
 root.title("SUPERMARK")
 root.configure(background="#030303")
-titulo=Label(root, text=("SUPERMARK"),bd=5, relief=FLAT, 
-             font=("arial black", 40), bg="#A93226", fg="#D0D3D4").pack(fill=X)
+titulo=Label(root, text=("SUPERMARK"),bd=5, relief=GROOVE, 
+             font=("arial black", 35), bg="#050505", fg="#D0D3D4").pack(fill=X)
+subtitulo=Label(root, text=("BIENVENIDOS!!!"),bd=5, relief=FLAT, 
+             font=("arial black", 20), bg="#050505", fg="#D0D3D4").pack(fill=Y)             
 
-#LOGO 
-#logo=tk.PhotoImage(file="logosupermark.ico")
-#logo_super=tk.Label(root, image="logosupermark.ico").pack(side="left")
+#ICONO DE VENTANA
+root.iconbitmap("Supermark\src\screen\carrito-de-compras.ico")            
+
+#LOGO
+
+img=PhotoImage(file="Supermark\src\screen\logosupermark.gif")
+
+fondo=Label(root, image=img,width=250, height=100).place(x=0, y=2)
 
 
 
 #DATOS CLIENTES
 datos_clientes=LabelFrame(root, text="CLIENTES", font=("arial black", 14),
                           bd=10, background="#F7DC6F", relief=FLAT)
-datos_clientes.place(x=0, y=80, relwidth=1)
+datos_clientes.place(x=0, y=120, relwidth=1)
 
 nombre=Label(datos_clientes, text="Usuario", font=("arial black", 12), 
              bg="#F7DC6F").grid(row=0, column=0, padx=8)
@@ -48,14 +55,14 @@ cerrar_sesion=Button(datos_clientes,text="Cerrar Sesión", font=("arial black", 
 #VENTANA PRODUCTOS
 titulo_productos=Label(root, text="LISTA DE PRODUCTOS",font=("arial black", 15),
              bd=5, relief=FLAT, foreground="#050505", background="#F7DC6F")
-titulo_productos.place(x=0, y=180, width=300)
+titulo_productos.place(x=0, y=200, width=300)
 
 
 #VENTANA FACTURACION
 
 factura=Label(root, text="FACTURACION",font=("arial black", 15),
              bd=5, relief=FLAT, foreground="#050505", background="#F7DC6F")
-factura.place(x=600, y=180, width=300)
+factura.place(x=600, y=200, width=300)
 
 def facturar():
     
@@ -68,12 +75,13 @@ factura.insert(2, "TRANSFERENCIA")
 factura.pack()
 factura.place(x=600, y=250)
 
-boton=Button(root, text="CONFIRMAR PAGO", font=("arial black",10),
+boton1=Button(root, text="CONFIRMAR PAGO", font=("arial black",10),
               foreground="#F7F9F9", background="#A93226",command=facturar)
-boton.pack(side=LEFT, padx=15, pady=20)
-boton.place(x=602, y=410)
+boton1.pack(side=LEFT, padx=15, pady=20)
+boton1.place(x=602, y=410)
 
 
+ 
 
 
 #FUNCION PARA AGREGAR PRODUCTOS
@@ -160,3 +168,5 @@ boton_enviar=Button(boton_frame, text="ENVIO A DOMICILIO", width=20, font=("aria
 
 
 root.mainloop()
+
+
