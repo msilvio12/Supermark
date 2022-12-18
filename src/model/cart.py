@@ -18,17 +18,11 @@ class Carrito:
 
     # Metodo para comprobar si un producto tiene stock suficiente para operar la demanda del cliente
     def comprobar_cantidad(self, item: Producto, cantidad: int):
-        if item.stock > cantidad:
-            return True
-        else:
-            return False
+        return item.stock > cantidad
 
     # Metodo para comprobar si el objeto ya se encuentar en el carrito
     def comprobar_duplicado(self, item: Producto):
-        if item not in self.lista:
-            return False
-        else:
-            return True
+        return item in self.lista
 
     # Metodo para agregar objetos Producto al carrito llamando a otros metodos para comprobar
     def agregar(self, item: Producto, cantidad: int):

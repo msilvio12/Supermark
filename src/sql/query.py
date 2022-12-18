@@ -6,56 +6,80 @@ class Consulta:
         self._db = SQLite("src/database/Supermark.sqlite3")
 
     # Crear tabla formateando la lista recibida para pasarla como consulta
-    def crear_tabla(self, tabla_nombre: str, lista_columna: list[str]):
+    def crear_tabla(self, tabla_nombre: str,
+                    lista_columna: list[str]
+                    ):
         try:
             with self._db as cur:
-                return cur.execute(f"""CREATE TABLE IF NOT EXISTS {tabla_nombre}
-                                       ({", ".join(lista_columna)});"""
+                return cur.execute(f"""
+                                    CREATE TABLE IF NOT EXISTS {tabla_nombre}
+                                    ({", ".join(lista_columna)});"""
                                    )
         except Exception as e:
             print(e)
 
     # Insertar un cliente pasando una lista con las columnas deseadas
-    def insertar_cliente(self, tabla_nombre: str, lista_columna: list[str], lista_valores: list[str]):
+    def insertar_cliente(self, tabla_nombre: str,
+                         lista_columna: list[str],
+                         lista_valores: list[str]
+                         ):
         try:
             with self._db as cur:
-                return cur.execute(f"""INSERT OR IGNORE INTO {tabla_nombre} ({", ".join(lista_columna)}) 
-                                       VALUES(?, ?, ?, ?, ?)""", (lista_valores)
+                return cur.execute(f"""
+                                    INSERT OR IGNORE INTO {tabla_nombre}
+                                    ({", ".join(lista_columna)})
+                                    VALUES(?, ?, ?, ?, ?)""", (lista_valores)
                                    )
         except Exception as e:
             print(e)
 
     # Insertar un administrador pasando una lista con las columnas deseadas
-    def insertar_admin(self, tabla_nombre: str, lista_columna: list[str], lista_valores: list[str]):
+    def insertar_admin(self, tabla_nombre: str,
+                       lista_columna: list[str],
+                       lista_valores: list[str]
+                       ):
         try:
             with self._db as cur:
-                return cur.execute(f"""INSERT OR IGNORE INTO {tabla_nombre} ({", ".join(lista_columna)}) 
-                                       VALUES(?, ?, ?, ?, ?)""", (lista_valores)
+                return cur.execute(f"""
+                                    INSERT OR IGNORE INTO {tabla_nombre}
+                                    ({", ".join(lista_columna)})
+                                    VALUES(?, ?, ?, ?, ?)""", (lista_valores)
                                    )
         except Exception as e:
             print(e)
 
-    # Buscar cliente en una tabla y traer una columna
-    def buscar_cliente(self, usuario: str, clave: str):
+    # Buscar usuario en tabla cliente para iniciar sesion
+    def iniciar_cliente(self, usuario: str, clave: str):
         try:
             with self._db as cur:
-                return cur.execute("""SELECT usuario,clave 
-                                      FROM cliente 
-                                      WHERE usuario = ? 
+                return cur.execute("""SELECT *
+                                      FROM cliente
+                                      WHERE usuario = ?
                                       AND clave = ?""", (usuario, clave)
                                    ).fetchone()
         except Exception as e:
             print(e)
 
-    # Buscar admin en una tabla y traer una columna
-    def buscar_admin(self, usuario: str, clave: str):
+    # Buscar usuario en tabla administracion para iniciar sesion
+    def iniciar_admin(self, usuario: str, clave: str):
         try:
             with self._db as cur:
-                return cur.execute("""SELECT usuario,clave 
-                                      FROM administracion 
-                                      WHERE usuario = ? 
+                return cur.execute("""SELECT *
+                                      FROM administracion
+                                      WHERE usuario = ?
                                       AND clave = ?""", (usuario, clave)
                                    ).fetchone()
+        except Exception as e:
+            print(e)
+
+    # Buscar usuario en tabla cliente para comprobar repetidos
+    def buscar_cliente(self, usuario: str):
+        try:
+            with self._db as cur:
+                return cur.execute("""SELECT usuario
+                                      FROM cliente
+                                      WHERE usuario = ?""", (usuario)
+                                   ).fetchall()
         except Exception as e:
             print(e)
 
@@ -114,7 +138,12 @@ class Consulta:
             print(e)
 
     # Actualizar un registro de una columna a la vez
-    def actualizar_registro(self, tabla_nombre: str, columna_nombre: str, nuevo_valor, columna_id: str, id: int,):
+    def actualizar_registro(self, tabla_nombre: str,
+                            columna_nombre: str,
+                            nuevo_valor,
+                            columna_id: str,
+                            id: int,
+                            ):
         try:
             with self._db as cur:
                 cur.execute(

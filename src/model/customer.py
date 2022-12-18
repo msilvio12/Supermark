@@ -1,10 +1,14 @@
 from model.payment import Tarjeta
 from model.cart import Carrito
-from model.product import Producto
 
 
 class Cliente:
-    def __init__(self, usuario: str, clave: str, nombre: str, apellido: str, direccion: str):
+    def __init__(self, usuario: str,
+                 clave: str,
+                 nombre: str,
+                 apellido: str,
+                 direccion: str):
+
         self._usuario = usuario
         self._clave = clave
         self._nombre = nombre
@@ -67,7 +71,11 @@ class Cliente:
 
     # Metodo magico formal para mostrar el objeto con print
     def __repr__(self) -> str:
-        return f'Cliente("{self._usuario}","{self._clave}","{self._nombre}","{self._apellido}","{self._direccion}")'
+        return f"""Cliente("{self._usuario}",
+                           "{self._clave}",
+                           "{self._nombre}",
+                           "{self._apellido}",
+                           "{self._direccion}")"""
 
     # Metodo catalogo de productos
     def catalogo(self):

@@ -1,5 +1,5 @@
+from screen.login_screen import Sesion
 from sql.query import Consulta
-from screen.login import Inicio
 
 
 # Se instancia Consulta para crear la base de datos
@@ -34,19 +34,32 @@ def sql_ejemplos():
 
     base = Consulta()
 
-    base.insertar_cliente('cliente', ['usuario', 'clave', 'nombre', 'apellido', 'direccion'],
-                          ['Rosquilla', '1234', 'Homero', 'Simpson', 'Av. Siempreviva 742'])
+    base.insertar_cliente('cliente', ['usuario',
+                                      'clave',
+                                      'nombre',
+                                      'apellido',
+                                      'direccion'], ['Rosquilla',
+                                                     '1234',
+                                                     'Homero',
+                                                     'Simpson',
+                                                     'Av. Siempreviva 742'])
 
-    base.insertar_admin('administracion', ['usuario', 'clave', 'nombre', 'apellido', 'rol'],
-                        ['Magia', '1234', 'Magie', 'Simpson', 'Supervisor'])
+    base.insertar_admin('administracion', ['usuario',
+                                           'clave',
+                                           'nombre',
+                                           'apellido',
+                                           'rol'], ['Magia',
+                                                    '1234',
+                                                    'Magie',
+                                                    'Simpson',
+                                                    'Supervisor'])
 
 
 def main():
     sql_database()
     sql_ejemplos()
 
-    root = Inicio()
-    root.mainloop()
+    Sesion()
 
 
 if __name__ == '__main__':
