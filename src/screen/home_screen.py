@@ -52,7 +52,7 @@ class Inicio(Toplevel):
                     image=img0,
                     borderwidth=0,
                     highlightthickness=0,
-                    command=self.btn_clicked,
+                    command=self.vacio,
                     relief="flat")
 
         b0.place(x=25, y=340,
@@ -64,7 +64,7 @@ class Inicio(Toplevel):
                     image=img1,
                     borderwidth=0,
                     highlightthickness=0,
-                    command=self.btn_clicked,
+                    command=self.vacio,
                     relief="flat")
 
         b1.place(x=25, y=395,
@@ -76,7 +76,7 @@ class Inicio(Toplevel):
                     image=img2,
                     borderwidth=0,
                     highlightthickness=0,
-                    command=self.btn_clicked,
+                    command=self.vacio,
                     relief="flat")
 
         b2.place(x=25, y=450,
@@ -100,7 +100,7 @@ class Inicio(Toplevel):
                     image=img4,
                     borderwidth=0,
                     highlightthickness=0,
-                    command=self.btn_clicked,
+                    command=self.vacio,
                     relief="flat")
 
         b4.place(x=930, y=12,
@@ -112,7 +112,7 @@ class Inicio(Toplevel):
                     image=img5,
                     borderwidth=0,
                     highlightthickness=0,
-                    command=self.btn_clicked,
+                    command=self.vacio,
                     relief="flat")
 
         b5.place(x=825, y=560,
@@ -139,7 +139,7 @@ class Inicio(Toplevel):
                     image=img6,
                     borderwidth=0,
                     highlightthickness=0,
-                    command=self.btn_clicked,
+                    command=self.vacio,
                     relief="flat")
 
         b6.place(x=280, y=170,
@@ -151,7 +151,7 @@ class Inicio(Toplevel):
                     image=img7,
                     borderwidth=0,
                     highlightthickness=0,
-                    command=self.btn_clicked,
+                    command=self.vacio,
                     relief="flat")
 
         b7.place(x=440, y=170,
@@ -173,7 +173,7 @@ class Inicio(Toplevel):
                     image=img8,
                     borderwidth=0,
                     highlightthickness=0,
-                    command=self.btn_clicked,
+                    command=self.vacio,
                     relief="flat")
 
         b8.place(x=440, y=395,
@@ -185,7 +185,7 @@ class Inicio(Toplevel):
                     image=img9,
                     borderwidth=0,
                     highlightthickness=0,
-                    command=self.btn_clicked,
+                    command=self.vacio,
                     relief="flat")
 
         b9.place(x=280, y=395,
@@ -197,21 +197,36 @@ class Inicio(Toplevel):
                      image=img10,
                      borderwidth=0,
                      highlightthickness=0,
-                     command=self.btn_clicked,
+                     command=self.vacio,
                      relief="flat")
 
         b10.place(x=1038, y=560,
                   width=38,
                   height=38)
 
-        treeview = ttk.Treeview(canvas,
+        self.treeview(canvas)  # <-
+
+        canvas.place(x=0, y=0)  # <- Ubicacion del canvas
+        self._frame.pack()  # <- Ubicacion del frame dentro del frame principal
+        canvas.pack()  # <- Ubicacion del canvas dentro del frame principal
+        canvas.mainloop()  # <- Iniciar el loop del canvas
+
+    # Treeview dentro de Canvas
+    def treeview(self, contenedor: Canvas) -> ttk.Treeview:
+        treeview = ttk.Treeview(contenedor,
                                 columns=("#1", "#2", "#3", "#4"),
                                 show="headings",
-                                height=5)
+                                height=5,
+                                selectmode="browse")
 
         treeview.place(x=620, y=150,
                        width=560,
                        height=390)
+
+        return self.treeview_config(treeview)
+
+    # Treeview config
+    def treeview_config(self, treeview: ttk.Treeview) -> ttk.Treeview:
 
         treeview.column("#1", width=80, anchor="center", stretch=False)
         treeview.column("#2", width=250, anchor="center", stretch=False)
@@ -222,13 +237,10 @@ class Inicio(Toplevel):
         treeview.heading("#2", text="Nombre")
         treeview.heading("#3", text="Precio")
         treeview.heading("#4", text="Cantidad")
+        return treeview
 
-        canvas.place(x=0, y=0)  # <- Ubicacion del canvas
-        self._frame.pack()  # <- Ubicacion del frame dentro del frame principal
-        canvas.pack()  # <- Ubicacion del canvas dentro del frame principal
-        canvas.mainloop()  # <- Iniciar el loop del canvas
-
-    def btn_clicked(self):
+    # Boton clicked
+    def vacio(self):
         print("Oprimio botón")
         return messagebox.showinfo("Información",
                                    "En proceso...")
@@ -239,4 +251,4 @@ class Inicio(Toplevel):
                                "¿Está seguro que desea cerrar sesión?"):
 
             self.wm_deiconify()  # <- Mostrar el frame principal
-            return self.destroy()
+            return self.master.destroy()
