@@ -1,4 +1,4 @@
-from tkinter import (Button, Canvas, Frame, PhotoImage, Tk,
+from tkinter import (Button, Canvas, Frame, PhotoImage, Tk, ttk,
                      Toplevel, messagebox)
 
 from sql.query import Consulta
@@ -44,7 +44,7 @@ class Inicio(Toplevel):
 
         background_img = PhotoImage(
             file="src/assets/home_assets/background.png")
-        canvas.create_image(590.0, 310.0,
+        canvas.create_image(125.0, 310.0,
                             image=background_img)
 
         img0 = PhotoImage(file="src/assets/home_assets/button_profile.png")
@@ -115,7 +115,7 @@ class Inicio(Toplevel):
                     command=self.btn_clicked,
                     relief="flat")
 
-        b5.place(x=855, y=560,
+        b5.place(x=825, y=560,
                  width=200,
                  height=38)
 
@@ -129,7 +129,7 @@ class Inicio(Toplevel):
                            fill="#ffffff",
                            font=("Inter-Regular", int(15.0)))
 
-        canvas.create_text(489.0, 116.0,
+        canvas.create_text(427.0, 116.0,
                            text="Promociones",
                            fill="#000000",
                            font=("Inter-ExtraBold", int(25.0)))
@@ -142,19 +142,9 @@ class Inicio(Toplevel):
                     command=self.btn_clicked,
                     relief="flat")
 
-        b6.place(x=313, y=174,
+        b6.place(x=280, y=170,
                  width=130,
                  height=130)
-
-        canvas.create_text(954.5, 116.0,
-                           text="Lista de Productos",
-                           fill="#000000",
-                           font=("Inter-ExtraBold", int(25.0)))
-
-        canvas.create_text(489.0, 348.0,
-                           text="Articulo Destacado",
-                           fill="#000000",
-                           font=("Inter-ExtraBold", int(25.0)))
 
         img7 = PhotoImage(file="src/assets/home_assets/img7.png")
         b7 = Button(canvas,
@@ -164,9 +154,74 @@ class Inicio(Toplevel):
                     command=self.btn_clicked,
                     relief="flat")
 
-        b7.place(x=515, y=395,
+        b7.place(x=440, y=170,
                  width=130,
                  height=130)
+
+        canvas.create_text(925.5, 116.0,
+                           text="Lista de Productos",
+                           fill="#000000",
+                           font=("Inter-ExtraBold", int(25.0)))
+
+        canvas.create_text(427.0, 348.0,
+                           text="Articulo Destacado",
+                           fill="#000000",
+                           font=("Inter-ExtraBold", int(25.0)))
+
+        img8 = PhotoImage(file="src/assets/home_assets/img8.png")
+        b8 = Button(canvas,
+                    image=img8,
+                    borderwidth=0,
+                    highlightthickness=0,
+                    command=self.btn_clicked,
+                    relief="flat")
+
+        b8.place(x=440, y=395,
+                 width=130,
+                 height=130)
+
+        img9 = PhotoImage(file="src/assets/home_assets/img9.png")
+        b9 = Button(canvas,
+                    image=img9,
+                    borderwidth=0,
+                    highlightthickness=0,
+                    command=self.btn_clicked,
+                    relief="flat")
+
+        b9.place(x=280, y=395,
+                 width=130,
+                 height=130)
+
+        img10 = PhotoImage(file="src/assets/home_assets/button_reload.png")
+        b10 = Button(canvas,
+                     image=img10,
+                     borderwidth=0,
+                     highlightthickness=0,
+                     command=self.btn_clicked,
+                     relief="flat")
+
+        b10.place(x=1038, y=560,
+                  width=38,
+                  height=38)
+
+        treeview = ttk.Treeview(canvas,
+                                columns=("#1", "#2", "#3", "#4"),
+                                show="headings",
+                                height=5)
+
+        treeview.place(x=620, y=150,
+                       width=560,
+                       height=390)
+
+        treeview.column("#1", width=80, anchor="center", stretch=False)
+        treeview.column("#2", width=250, anchor="center", stretch=False)
+        treeview.column("#3", width=100, anchor="center", stretch=False)
+        treeview.column("#4", width=90, anchor="center", stretch=False)
+
+        treeview.heading("#1", text="ID")
+        treeview.heading("#2", text="Nombre")
+        treeview.heading("#3", text="Precio")
+        treeview.heading("#4", text="Cantidad")
 
         canvas.place(x=0, y=0)  # <- Ubicacion del canvas
         self._frame.pack()  # <- Ubicacion del frame dentro del frame principal
