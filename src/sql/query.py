@@ -83,6 +83,21 @@ class Consulta:
         except Exception as e:
             print(e)
 
+    # Insertar productos pasando una lista con las columnas deseadas
+    def insertar_producto(self, tabla_nombre: str,
+                          lista_columna: list[str],
+                          lista_valores: list[tuple]
+                          ):
+        try:
+            with self._db as cur:
+                return cur.execute(f"""
+                                    INSERT OR IGNORE INTO {tabla_nombre}
+                                    ({", ".join(lista_columna)})
+                                    VALUES(?, ?, ?, ?, ?)""", (lista_valores)
+                                   )
+        except Exception as e:
+            print(e)
+
     # Buscar en una tabla y traer una columna
     def buscar_columna(self, tabla_nombre: str, columna_nombre: str):
         try:
