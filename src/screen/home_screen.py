@@ -1,6 +1,7 @@
 from tkinter import (Button, Canvas, Frame, PhotoImage, Tk, ttk,
                      Toplevel, messagebox)
 
+from screen.cart_screen import ShoppingCart
 from sql.query import Consulta
 
 
@@ -100,7 +101,7 @@ class Inicio(Toplevel):
                     image=img4,
                     borderwidth=0,
                     highlightthickness=0,
-                    command=self.vacio,
+                    command=self.iniciar_carrito,
                     relief="flat")
 
         b4.place(x=930, y=12,
@@ -245,10 +246,13 @@ class Inicio(Toplevel):
         return messagebox.showinfo("Información",
                                    "En proceso...")
 
+    def iniciar_carrito(self):
+        return ShoppingCart(self)
+
     def cerrar_sesion(self):
         print("Cerrar sesión")
         if messagebox.askyesno("Cerrar Sesión",
                                "¿Está seguro que desea cerrar sesión?"):
 
             self.wm_deiconify()  # <- Mostrar el frame principal
-            return self.master.destroy()
+            return self.master.destroy()  # <- Cerrar el frame actual
