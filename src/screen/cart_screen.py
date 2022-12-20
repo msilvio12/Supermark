@@ -1,4 +1,4 @@
-from tkinter import (END, Button, Frame, Listbox,
+from tkinter import (END, Button, Frame, Listbox, messagebox,
                      Toplevel)
 
 
@@ -66,4 +66,6 @@ class ShoppingCart(Toplevel):
 
     # Finalizar compra del carrito de compras
     def finalizar_compra(self):
-        self.destroy()
+        messagebox.showinfo("Información",
+                            "Se a realizado la compra")
+        return self.destroy()

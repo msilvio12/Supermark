@@ -1,10 +1,11 @@
-from database.script.db_script import sql_credenciales, sql_database
+from database.script.db_script import (sql_database)
 from screen.login_screen import Sesion
 
 
 def main():
     sql_database()  # <- Crear base de datos con columnas
-    sql_credenciales()  # <- Crear ejemplos cliente y admin
+    # sql_credenciales()  # <- Crear ejemplos cliente y admin
+    # sql_productos()
 
     Sesion()  # <- Iniciar ventana root tkinter
 
