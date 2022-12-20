@@ -103,7 +103,7 @@ class Consulta:
         try:
             with self._db as cur:
                 cur.execute(
-                    f"""SELEC {columna_nombre} FROM {tabla_nombre}"""
+                    f"""SELECT {columna_nombre} FROM {tabla_nombre}"""
                 )
         except Exception as e:
             print(e)
@@ -112,9 +112,9 @@ class Consulta:
     def buscar_todo(self, tabla_nombre: str):
         try:
             with self._db as cur:
-                cur.execute(
-                    f"""SELEC * FROM {tabla_nombre}"""
-                )
+                return cur.execute(f"""
+                                SELECT * FROM {tabla_nombre}"""
+                                   ).fetchall()
         except Exception as e:
             print(e)
 

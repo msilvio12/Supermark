@@ -171,7 +171,7 @@ class Sesion(Tk):
 
         elif self._sql.iniciar_cliente(self._usuario.get(), self._clave.get()):
             print(f"Se encontro cliente: {self._usuario.get()}")
-            self.wm_withdraw()  # <- Minimizar ventana actual(login)
+            self.wm_withdraw()  # <- Ocultar ventana actual(login)
             return Inicio(self)
 
         return messagebox.showerror("Error",

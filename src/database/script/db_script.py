@@ -21,7 +21,7 @@ def sql_database():
                                  'direccion TEXT(50) NOT NULL'])
 
     base.crear_tabla('productos', ['id INTEGER PRIMARY KEY AUTOINCREMENT',
-                                   'nombre TEXT NOT NULL',
+                                   'nombre TEXT NOT NULL UNIQUE',
                                    'categoria TEXT NOT NULL',
                                    'precio REAL NOT NULL',
                                    'stock INTEGER NOT NULL',

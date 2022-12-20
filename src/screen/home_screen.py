@@ -206,6 +206,7 @@ class Inicio(Toplevel):
                   height=38)
 
         self.treeview(canvas)  # <-
+        self.mostrar_productos_sql(self.treeview(canvas))
 
         canvas.place(x=0, y=0)  # <- Ubicacion del canvas
         self._frame.pack()  # <- Ubicacion del frame dentro del frame principal
@@ -215,7 +216,7 @@ class Inicio(Toplevel):
     # Treeview dentro de Canvas
     def treeview(self, contenedor: Canvas) -> ttk.Treeview:
         treeview = ttk.Treeview(contenedor,
-                                columns=("#1", "#2", "#3", "#4"),
+                                columns=("#1", "#2", "#3", "#4", "#5", "#6"),
                                 show="headings",
                                 height=5,
                                 selectmode="browse")
@@ -229,18 +230,37 @@ class Inicio(Toplevel):
     # Treeview config
     def treeview_config(self, treeview: ttk.Treeview) -> ttk.Treeview:
 
-        treeview.column("#1", width=80, anchor="center", stretch=False)
-        treeview.column("#2", width=250, anchor="center", stretch=False)
-        treeview.column("#3", width=100, anchor="center", stretch=False)
-        treeview.column("#4", width=90, anchor="center", stretch=False)
+        treeview.column("#1", width=50, anchor="center", stretch=False)
+        treeview.column("#2", width=150, anchor="w", stretch=False)
+        treeview.column("#3", width=80, anchor="center", stretch=False)
+        treeview.column("#4", width=80, anchor="center", stretch=False)
+        treeview.column("#5", width=50, anchor="center", stretch=False)
+        treeview.column("#6", width=120, anchor="w", stretch=False)
 
         treeview.heading("#1", text="ID")
         treeview.heading("#2", text="Nombre")
-        treeview.heading("#3", text="Precio")
-        treeview.heading("#4", text="Cantidad")
+        treeview.heading("#3", text="Categoria")
+        treeview.heading("#4", text="Precio")
+        treeview.heading("#5", text="Stock")
+        treeview.heading("#6", text="Descripcion")
         return treeview
 
+    # Mostrar prodcuctos en Treeview
+    def mostrar_productos_sql(self, treeview: ttk.Treeview):
+        productos = self._sql.buscar_todo("productos")
+        if productos is not None:
+            for producto in productos:  # <- Recorrer productos de la lista
+                treeview.insert("", "end", text=producto[0],
+                                values=(producto[0],
+                                        producto[1],
+                                        producto[2],
+                                        producto[3],
+                                        producto[4],
+                                        producto[5]))
+            return treeview
+
     # Boton clicked
+
     def vacio(self):
         print("Oprimio botón")
         return messagebox.showinfo("Información",
