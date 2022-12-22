@@ -5,12 +5,13 @@ from screen.cart_screen import ShoppingCart
 from sql.query import Consulta
 
 
-class Inicio(Toplevel):
+class Admin(Toplevel):
     def __init__(self, master: Tk, *args, **kwargs):
         super().__init__(master, *args, **kwargs)
         self.wait_visibility()  # <- Espera a que la ventana se crea
         self.grab_set()  # <- No interactuar con la ventana raiz hasta cerrar
-        self.title("Supermark - Inicio")  # <- Titulo de la ventana
+        # <- Titulo de la ventana
+        self.title("Supermark - Inicio - Administrador")
         self.geometry("1200x620")  # <- Dimension de la ventana
         self.iconbitmap("src/assets/icon_logo.ico")  # <- Icono
         self.resizable(False, False)  # <- Evitar agrandar ventana
@@ -121,7 +122,7 @@ class Inicio(Toplevel):
                  height=38)
 
         canvas.create_text(125.0, 227.0,
-                           text="Cliente",
+                           text="Administrador",
                            fill="#ffffff",
                            font=("Inter-ExtraBold", int(20.0)))
 
@@ -131,7 +132,7 @@ class Inicio(Toplevel):
                            font=("Inter-Regular", int(15.0)))
 
         canvas.create_text(427.0, 116.0,
-                           text="Promociones",
+                           text="Agregar Promociones",
                            fill="#000000",
                            font=("Inter-ExtraBold", int(25.0)))
 
@@ -165,7 +166,7 @@ class Inicio(Toplevel):
                            font=("Inter-ExtraBold", int(25.0)))
 
         canvas.create_text(427.0, 348.0,
-                           text="Articulo Destacado",
+                           text="Agregar productos a DB",
                            fill="#000000",
                            font=("Inter-ExtraBold", int(25.0)))
 
@@ -206,8 +207,7 @@ class Inicio(Toplevel):
                   width=38,
                   height=38)
 
-        self.treeview(canvas)  # <-
-        # self.mostrar_productos_sql(self.treeview(canvas))
+        self.treeview(canvas)
 
         canvas.place(x=0, y=0)  # <- Ubicacion del canvas
         self._frame.pack()  # <- Ubicacion del frame dentro del frame principal

@@ -1,5 +1,4 @@
-from tkinter import (END, Button, Frame, Listbox, messagebox,
-                     Toplevel)
+from tkinter import END, Button, Frame, Listbox, Toplevel, messagebox, ttk
 
 
 class ShoppingCart(Toplevel):
@@ -55,6 +54,38 @@ class ShoppingCart(Toplevel):
                                 text="Finalizar",
                                 command=self.finalizar_compra)
         self.finalizar.grid(row=3, column=0, sticky="nsew")
+
+    # Treeview dentro de Canvas
+    def treeview(self, contenedor: Frame) -> ttk.Treeview:
+        treeview = ttk.Treeview(contenedor,
+                                columns=("#1", "#2", "#3", "#4", "#5", "#6"),
+                                show="headings",
+                                height=5,
+                                selectmode="browse")
+
+        treeview.place(x=620, y=150,
+                       width=560,
+                       height=390)
+
+        return self.treeview_config(treeview)
+
+    # Treeview config
+    def treeview_config(self, treeview: ttk.Treeview) -> ttk.Treeview:
+
+        treeview.column("#1", width=50, anchor="center", stretch=False)
+        treeview.column("#2", width=150, anchor="w", stretch=False)
+        treeview.column("#3", width=80, anchor="center", stretch=False)
+        treeview.column("#4", width=80, anchor="center", stretch=False)
+        treeview.column("#5", width=50, anchor="center", stretch=False)
+        treeview.column("#6", width=120, anchor="w", stretch=False)
+
+        treeview.heading("#1", text="ID")
+        treeview.heading("#2", text="Nombre")
+        treeview.heading("#3", text="Categoria")
+        treeview.heading("#4", text="Precio")
+        treeview.heading("#5", text="Stock")
+        treeview.heading("#6", text="Descripcion")
+        return treeview
 
     # Agregar producto a la lista de compra
     def agregar_producto(self):

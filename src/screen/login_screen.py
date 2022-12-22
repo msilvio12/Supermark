@@ -2,6 +2,7 @@ from tkinter import (Button, Canvas, Entry, Frame, PhotoImage,
                      StringVar, Tk, messagebox)
 
 from screen.home_screen import Inicio
+from screen.admin_screen import Admin
 from screen.signup_screen import Registro
 from sql.query import Consulta
 
@@ -166,8 +167,8 @@ class Sesion(Tk):
     def iniciar_sesion(self):
         if self._sql.iniciar_admin(self._usuario.get(), self._clave.get()):
             print(f"Se encontro administrador: {self._usuario.get()}")
-            return messagebox.showinfo("Información",
-                                       f"Administrador {self._usuario.get()}")
+            self.wm_withdraw()  # <- Ocultar ventana actual(login)
+            return Admin(self)
 
         elif self._sql.iniciar_cliente(self._usuario.get(), self._clave.get()):
             print(f"Se encontro cliente: {self._usuario.get()}")
